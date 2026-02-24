@@ -1,4 +1,4 @@
-Лабораторная 1. 
+#Лабораторная 1. 
 
 Диспетчер Умного Дома (SmartHome Hub)
 
@@ -37,6 +37,7 @@
 Диаграмма классов(курсивом)
 
 <img width="1124" height="573" alt="image" src="https://github.com/user-attachments/assets/39cf8815-88fc-4495-8d28-3ebb0bbf2b3e" />
+
 
 
 
