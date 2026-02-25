@@ -36,7 +36,9 @@
 
 Диаграмма классов(курсивом)
 
-<img width="1124" height="573" alt="image" src="https://github.com/user-attachments/assets/39cf8815-88fc-4495-8d28-3ebb0bbf2b3e" />
+<img width="1126" height="754" alt="image" src="https://github.com/user-attachments/assets/0a4fc087-eded-42d2-88f4-e6d1f6c7487c" />
+
+
 
 
 
