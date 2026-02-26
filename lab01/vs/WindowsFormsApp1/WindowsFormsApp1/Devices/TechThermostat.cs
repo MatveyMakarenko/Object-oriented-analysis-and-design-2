@@ -4,18 +4,18 @@ namespace SmartHomeWithoutPattern.Devices
 {
     public class TechThermostat
     {
-        private int _temp;
-        private int _humidity = 45;
+        private int temp;
+        private int humidity = 45;
 
         public void SetTemp(int temp)
         {
-            _temp = temp;
+            temp = temp;
             Console.WriteLine($"[TechPro] Температура: {temp}°C");
         }
 
         public int GetCurrentTemp()
         {
-            return _temp;
+            return temp;
         }
 
         public string GetMode()
@@ -25,7 +25,8 @@ namespace SmartHomeWithoutPattern.Devices
 
         public int GetHumidity()
         {
-            return _humidity;
+            return humidity;
         }
     }
+
 }
