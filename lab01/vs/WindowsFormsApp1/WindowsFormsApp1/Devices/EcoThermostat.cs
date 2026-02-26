@@ -4,17 +4,17 @@ namespace SmartHomeWithoutPattern.Devices
 {
     public class EcoThermostat
     {
-        private int _temp;
+        private int temp;
 
         public void SetTemp(int temp)
         {
-            _temp = temp;
+            temp = temp;
             Console.WriteLine($"[EcoHome] Температура: {temp}°C");
         }
 
         public int GetCurrentTemp()
         {
-            return _temp;
+            return temp;
         }
 
         public string GetMode()
@@ -22,4 +22,5 @@ namespace SmartHomeWithoutPattern.Devices
             return "Стандарт";
         }
     }
+
 }
