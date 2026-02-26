@@ -22,7 +22,7 @@ namespace SmartHomeWithoutPattern
             btnLightToggle.Text = _manager.IsLightOn ? "Свет ВЫКЛ" : "Свет ВКЛ";
             btnLockToggle.Text = _manager.IsLockClosed ? "Замок ОТКРЫТЬ" : "Замок ЗАКРЫТЬ";
 
-            // ✅ СКРЫВАЕМ ПОЛЗУНОК ЯРКОСТИ ДЛЯ ECOHOME
+            
             bool isTechPro = _manager.CurrentVendor == "TechPro";
             trkBrightness.Visible = isTechPro;
             trkBrightness.Enabled = isTechPro;
@@ -68,4 +68,5 @@ namespace SmartHomeWithoutPattern
             MessageBox.Show(config, "Экспорт конфигурации (JSON)");
         }
     }
+
 }
