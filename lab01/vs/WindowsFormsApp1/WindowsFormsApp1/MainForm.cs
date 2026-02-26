@@ -18,7 +18,6 @@ namespace SmartHomeWithoutPattern
         {
             lblStatus.Text = _manager.GetDashboardStatus();
 
-            // Обновляем текст кнопок
             btnLightToggle.Text = _manager.IsLightOn ? "Свет ВЫКЛ" : "Свет ВКЛ";
             btnLockToggle.Text = _manager.IsLockClosed ? "Замок ОТКРЫТЬ" : "Замок ЗАКРЫТЬ";
 
@@ -70,3 +69,4 @@ namespace SmartHomeWithoutPattern
     }
 
 }
+
