@@ -43,6 +43,7 @@ SetFactory(new EcoHomeFactory());  // или new TechProFactory()
 ```
 
 <img width="1126" height="754" alt="image" src="https://github.com/user-attachments/assets/0a4fc087-eded-42d2-88f4-e6d1f6c7487c" />
+
 *Рисунок 1 - Диаграмма классов паттерна Abstract Factory в архитектуре приложения SmartHome Hub*
 <br><br>
 
@@ -62,6 +63,7 @@ SetFactory(new EcoHomeFactory());  // или new TechProFactory()
 ## Вывод:
 
 Применение паттерна Abstract Factory позволило устранить нарушение принципа Open/Closed, снизить связность между компонентами системы и гарантировать совместимость устройств внутри одной экосистемы. Для добавления нового вендора достаточно создать 4 новых класса (3 продукта + 1 фабрика), не изменяя существующий код клиента (MainForm). Это делает систему расширяемой, поддерживаемой и устойчивой к ошибкам конфигурации.
+
 
 
 
