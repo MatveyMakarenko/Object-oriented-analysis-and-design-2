@@ -44,8 +44,9 @@ SetFactory(new EcoHomeFactory());  // или new TechProFactory()
 
 <figure>
 <img width="1126" height="754" alt="image" src="https://github.com/user-attachments/assets/0a4fc087-eded-42d2-88f4-e6d1f6c7487c" />
-<figcaption>Рисунок 1 - Диаграмма классов паттерна Abstract Factory в архитектуре приложения SmartHome Hub</figcaption>
+<figcaption>          Рисунок 1 - Диаграмма классов паттерна Abstract Factory в архитектуре приложения SmartHome Hub</figcaption>
 </figure>
+
 
 
 
