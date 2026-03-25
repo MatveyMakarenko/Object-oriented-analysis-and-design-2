@@ -27,7 +27,8 @@
 
 
 
-<img width="974" height="538" alt="image" src="https://github.com/user-attachments/assets/5da826e4-138d-4526-8a15-0719be83a827" />
+<img width="1107" height="611" alt="Классов drawio" src="https://github.com/user-attachments/assets/e852825b-a1c6-49aa-a81d-126321e42a16" />
+
 **Рисунок 1 - диаграмма классов паттерна Decorator**
 
 
