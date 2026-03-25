@@ -33,7 +33,8 @@
 
 На рисунке 2 изображена диаграмма объектов для создания света.
 
-<img width="172" height="446" alt="Объектов drawio" src="https://github.com/user-attachments/assets/0ea718e7-6781-4934-a4a3-5bb74e85b806" />
+<img width="172" height="446" alt="image" src="https://github.com/user-attachments/assets/d5b9afef-b40b-4bf8-a9dc-7275c3a2f8fd" />
+
 
 **Рисунок 2 - диаграмма объектов создания света**
 
