@@ -33,7 +33,8 @@
 
 На рисунке 2 изображена диаграмма объектов для создания света.
 
-<img width="172" height="446" alt="image" src="https://github.com/user-attachments/assets/d5b9afef-b40b-4bf8-a9dc-7275c3a2f8fd" />
+<img width="172" height="446" alt="image" src="https://github.com/user-attachments/assets/536d3da7-8f10-43cc-ac69-b5da2575d2c3" />
+
 
 
 **Рисунок 2 - диаграмма объектов создания света**
