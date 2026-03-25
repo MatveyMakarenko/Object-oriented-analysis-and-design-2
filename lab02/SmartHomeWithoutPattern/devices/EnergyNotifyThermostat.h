@@ -1,0 +1,35 @@
+#pragma once
+#include "IDevice.h"
+#include <ctime>
+#include <string>
+
+class EnergyNotifyThermostat : public IDevice {
+private:
+    int temp = 20;
+    bool isActive = false;
+    double energyUsed = 0.0;
+    int notifyCount = 0;
+    time_t startTime = 0;
+public:
+    void Activate() override {
+        if (isActive) return;
+        isActive = true;
+        startTime = time(nullptr);
+        notifyCount++;
+    }
+    void Deactivate() override {
+        if (!isActive) return;
+        isActive = false;
+        if (startTime > 0) {
+            double hours = difftime(time(nullptr), startTime) / 3600.0;
+            energyUsed += hours * 100;
+        }
+        notifyCount++;
+    }
+    std::string GetStatus() override { return isActive ? std::to_string(temp) + "°C (АКТИВЕН)" : std::to_string(temp) + "°C (ВЫКЛ)"; }
+    std::string GetEnergyUsage() override { return std::to_string(energyUsed) + " Вт·ч"; }
+    std::string GetNotifyCount() override { return std::to_string(notifyCount); }
+    std::string GetSchedule() override { return "-"; }
+    void SetTemp(int t) { temp = t; }
+    int GetCurrentTemp() { return temp; }
+};

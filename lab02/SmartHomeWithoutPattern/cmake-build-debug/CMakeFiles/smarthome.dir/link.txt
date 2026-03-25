@@ -1,0 +1,3 @@
+"F:\CLion 2025.3.3\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\smarthome.dir/objects.a
+C:\ProgramData\mingw64\mingw64\bin\ar.exe qc CMakeFiles\smarthome.dir/objects.a @CMakeFiles\smarthome.dir\objects1.rsp
+C:\ProgramData\mingw64\mingw64\bin\c++.exe -g -Wl,--whole-archive CMakeFiles\smarthome.dir/objects.a -Wl,--no-whole-archive -o smarthome.exe -Wl,--out-implib,libsmarthome.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\smarthome.dir\linkLibs.rsp
