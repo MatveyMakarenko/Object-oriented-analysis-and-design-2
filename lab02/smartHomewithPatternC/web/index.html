@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartHome Hub - Без паттерна</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 { text-align: center; color: #333; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; }
+        .device {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .device h3 { margin-top: 0; color: #444; }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background: #4CAF50;
+            color: white;
+        }
+        button:hover { background: #45a049; }
+        button.off { background: #f44336; }
+        button.off:hover { background: #da190b; }
+        button.save { background: #2196F3; }
+        button.save:hover { background: #1976D2; }
+        .status { font-weight: bold; color: #333; }
+        .info { color: #666; font-size: 0.9em; margin: 5px 0; }
+        .label { font-weight: bold; color: #555; }
+
+        .config-panel {
+            background: #e8f4f8;
+            border: 1px solid #b8d4e8;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .config-panel h4 {
+            margin-top: 0;
+            color: #2c5282;
+        }
+        .config-option {
+            display: inline-block;
+            margin: 5px 15px 5px 0;
+        }
+        .config-option label {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        .schedule-inputs {
+            display: none;  /* Скрыто по умолчанию */
+            margin-top: 10px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .schedule-inputs.show {
+            display: block;  /* Показываем когда Timer включён */
+        }
+        .schedule-inputs input[type="time"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .class-info {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 0.85em;
+        }
+        .class-info strong { color: #856404; }
+
+        /* Стили для отображения расписания в статусе */
+        .schedule-display {
+            display: none;  /* Скрыто если Timer не включён */
+        }
+        .schedule-display.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<h1>🏠 SmartHome Hub</h1>
+<p class="subtitle">
+    <em>Лабораторная 2: Реализация БЕЗ паттерна Decorator (24 класса)</em>
+</p>
+
+<!-- Свет -->
+<div class="device" id="device-light">
+    <h3>💡 Свет</h3>
+
+    <div class="class-info">
+        <strong>⚠️ Проблема:</strong> Для каждой комбинации функций нужен отдельный класс!
+        <br>Сейчас используется: <span id="light-class-name">EnergyNotifyTimerLight</span>
+    </div>
+
+    <div class="config-panel">
+        <h4>⚙️ Конфигурация (выберите функции)</h4>
+        <div class="config-option">
+            <input type="checkbox" id="light-energy" checked>
+            <label for="light-energy">💡 EnergySaving</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="light-notify" checked>
+            <label for="light-notify">📱 Notification</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="light-timer" checked onchange="toggleScheduleInputs('light')">
+            <label for="light-timer">⏰ Timer</label>
+        </div>
+
+        <!-- ⚠️ Поля расписания (появляются только при выборе Timer) -->
+        <div class="schedule-inputs" id="light-schedule-inputs">
+            <label>⏰ Расписание:</label>
+            <input type="time" id="light-schedule-start" value="09:00">
+            <span> — </span>
+            <input type="time" id="light-schedule-end" value="23:00">
+        </div>
+
+        <br>
+        <button class="save" onclick="saveConfig('light')">💾 Применить конфигурацию</button>
+        <button class="save" onclick="saveSchedule('light')">⏰ Сохранить расписание</button>
+    </div>
+
+    <!-- Статус устройства -->
+    <p><span class="label">Статус:</span> <span id="light-status">ВЫКЛ</span></p>
+    <p class="info-light-energy"><span class="label">Энергия:</span> <span id="light-energy-value">0 Вт·ч</span></p>
+    <p class="info-light-notify"><span class="label">Уведомления:</span> <span id="light-notify-count">0</span></p>
+
+    <!-- ⚠️ Отображение расписания перенесено СЮДА (вниз) -->
+    <p class="schedule-display info-light-timer">
+        <span class="label">Расписание:</span> <span id="light-schedule-value">-</span>
+    </p>
+
+    <button onclick="fetch('/light/on')">Включить</button>
+    <button class="off" onclick="fetch('/light/off')">Выключить</button>
+</div>
+
+<!-- Термостат -->
+<div class="device" id="device-thermostat">
+    <h3>🌡️ Термостат</h3>
+
+    <div class="class-info">
+        <strong>⚠️ Проблема:</strong> Для каждой комбинации функций нужен отдельный класс!
+        <br>Сейчас используется: <span id="thermostat-class-name">EnergyNotifyTimerThermostat</span>
+    </div>
+
+    <div class="config-panel">
+        <h4>⚙️ Конфигурация (выберите функции)</h4>
+        <div class="config-option">
+            <input type="checkbox" id="thermostat-energy" checked>
+            <label for="thermostat-energy">💡 EnergySaving</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="thermostat-notify" checked>
+            <label for="thermostat-notify">📱 Notification</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="thermostat-timer" checked onchange="toggleScheduleInputs('thermostat')">
+            <label for="thermostat-timer">⏰ Timer</label>
+        </div>
+
+        <!-- Поля расписания -->
+        <div class="schedule-inputs" id="thermostat-schedule-inputs">
+            <label>⏰ Расписание:</label>
+            <input type="time" id="thermostat-schedule-start" value="08:00">
+            <span> — </span>
+            <input type="time" id="thermostat-schedule-end" value="22:00">
+        </div>
+
+        <br>
+        <button class="save" onclick="saveConfig('thermostat')">💾 Применить конфигурацию</button>
+        <button class="save" onclick="saveSchedule('thermostat')">⏰ Сохранить расписание</button>
+    </div>
+
+    <p><span class="label">Статус:</span> <span id="thermostat-status">ВЫКЛ</span></p>
+    <p class="info-thermostat-energy"><span class="label">Энергия:</span> <span id="thermostat-energy-value">0 Вт·ч</span></p>
+    <p class="info-thermostat-notify"><span class="label">Уведомления:</span> <span id="thermostat-notify-count">0</span></p>
+
+    <!-- Отображение расписания -->
+    <p class="schedule-display info-thermostat-timer">
+        <span class="label">Расписание:</span> <span id="thermostat-schedule-value">-</span>
+    </p>
+
+    <button onclick="fetch('/thermostat/on')">Включить</button>
+    <button class="off" onclick="fetch('/thermostat/off')">Выключить</button>
+</div>
+
+<!-- Замок -->
+<div class="device" id="device-lock">
+    <h3>🔒 Замок</h3>
+
+    <div class="class-info">
+        <strong>⚠️ Проблема:</strong> Для каждой комбинации функций нужен отдельный класс!
+        <br>Сейчас используется: <span id="lock-class-name">EnergyNotifyTimerLock</span>
+    </div>
+
+    <div class="config-panel">
+        <h4>⚙️ Конфигурация (выберите функции)</h4>
+        <div class="config-option">
+            <input type="checkbox" id="lock-energy" checked>
+            <label for="lock-energy">💡 EnergySaving</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="lock-notify" checked>
+            <label for="lock-notify">📱 Notification</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="lock-timer" checked onchange="toggleScheduleInputs('lock')">
+            <label for="lock-timer">⏰ Timer</label>
+        </div>
+
+        <!-- Поля расписания -->
+        <div class="schedule-inputs" id="lock-schedule-inputs">
+            <label>⏰ Расписание:</label>
+            <input type="time" id="lock-schedule-start" value="08:00">
+            <span> — </span>
+            <input type="time" id="lock-schedule-end" value="22:00">
+        </div>
+
+        <br>
+        <button class="save" onclick="saveConfig('lock')">💾 Применить конфигурацию</button>
+        <button class="save" onclick="saveSchedule('lock')">⏰ Сохранить расписание</button>
+    </div>
+
+    <p><span class="label">Статус:</span> <span id="lock-status">ОТКРЫТ</span></p>
+    <p class="info-lock-energy"><span class="label">Энергия:</span> <span id="lock-energy-value">0 Вт·ч</span></p>
+    <p class="info-lock-notify"><span class="label">Уведомления:</span> <span id="lock-notify-count">0</span></p>
+
+    <!-- Отображение расписания -->
+    <p class="schedule-display info-lock-timer">
+        <span class="label">Расписание:</span> <span id="lock-schedule-value">-</span>
+    </p>
+
+    <button onclick="fetch('/lock/on')">Закрыть</button>
+    <button class="off" onclick="fetch('/lock/off')">Открыть</button>
+</div>
+
+<script>
+    // ⚠️ НОВАЯ ФУНКЦИЯ: Показать/скрыть поля расписания
+    function toggleScheduleInputs(device) {
+        const timerChecked = document.getElementById(device + '-timer').checked;
+        const inputsDiv = document.getElementById(device + '-schedule-inputs');
+        const displayP = document.querySelector('.info-' + device + '-timer');
+
+        if (timerChecked) {
+            inputsDiv.classList.add('show');
+            displayP.classList.add('show');
+        } else {
+            inputsDiv.classList.remove('show');
+            displayP.classList.remove('show');
+        }
+    }
+
+    // Получить имя класса на основе конфигурации
+    function getClassName(device, energy, notify, timer) {
+        const parts = [];
+        if (energy) parts.push('Energy');
+        if (notify) parts.push('Notify');
+        if (timer) parts.push('Timer');
+
+        let className = device.charAt(0).toUpperCase() + device.slice(1);
+        return parts.length > 0 ? parts.join('') + className : className;
+    }
+
+    // Загрузка конфигурации при старте
+    async function loadConfig() {
+        try {
+            const response = await fetch('/api/config');
+            const data = await response.json();
+
+            // Свет
+            document.getElementById('light-energy').checked = data.light.energy;
+            document.getElementById('light-notify').checked = data.light.notify;
+            document.getElementById('light-timer').checked = data.light.timer;
+            toggleScheduleInputs('light');  // ⚠️ Обновить видимость полей
+            updateClassInfo('light', data.light);
+            updateScheduleVisibility('light', data.light);
+
+            // Термостат
+            document.getElementById('thermostat-energy').checked = data.thermo.energy;
+            document.getElementById('thermostat-notify').checked = data.thermo.notify;
+            document.getElementById('thermostat-timer').checked = data.thermo.timer;
+            toggleScheduleInputs('thermostat');  // ⚠️ Обновить видимость полей
+            updateClassInfo('thermostat', data.thermo);
+            updateScheduleVisibility('thermostat', data.thermo);
+
+            // Замок
+            document.getElementById('lock-energy').checked = data.lock.energy;
+            document.getElementById('lock-notify').checked = data.lock.notify;
+            document.getElementById('lock-timer').checked = data.lock.timer;
+            toggleScheduleInputs('lock');  // ⚠️ Обновить видимость полей
+            updateClassInfo('lock', data.lock);
+            updateScheduleVisibility('lock', data.lock);
+
+        } catch (e) {
+            console.log('Конфигурация не загружена (используются значения по умолчанию)');
+            // Показать поля по умолчанию
+            toggleScheduleInputs('light');
+            toggleScheduleInputs('thermostat');
+            toggleScheduleInputs('lock');
+        }
+    }
+
+    // Обновить информацию о классе
+    function updateClassInfo(device, config) {
+        const className = getClassName(device, config.energy, config.notify, config.timer);
+        document.getElementById(device + '-class-name').textContent = className;
+    }
+
+    // ⚠️ НОВАЯ ФУНКЦИЯ: Обновить видимость строки расписания в статусе
+    function updateScheduleVisibility(device, config) {
+        const displayP = document.querySelector('.info-' + device + '-timer');
+        if (config.timer) {
+            displayP.classList.add('show');
+        } else {
+            displayP.classList.remove('show');
+        }
+    }
+
+    // Сохранение конфигурации
+    async function saveConfig(device) {
+        const config = {
+            energy: document.getElementById(device + '-energy').checked,
+            notify: document.getElementById(device + '-notify').checked,
+            timer: document.getElementById(device + '-timer').checked
+        };
+
+        try {
+            await fetch('/api/config/' + device, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(config)
+            });
+
+            updateClassInfo(device, config);
+            updateScheduleVisibility(device, config);
+            toggleScheduleInputs(device);  // ⚠️ Обновить видимость полей ввода
+
+            alert('✅ Конфигурация применена! Создан новый класс устройства.\n\n' +
+                '⚠️ В реализации БЕЗ паттерна это требует создания нового объекта\n' +
+                'другого класса (например, EnergyNotifyLight вместо EnergyNotifyTimerLight)');
+        } catch (e) {
+            alert('❌ Ошибка применения конфигурации');
+        }
+    }
+
+    // Сохранение расписания
+    async function saveSchedule(device) {
+        const start = document.getElementById(device + '-schedule-start').value;
+        const end = document.getElementById(device + '-schedule-end').value;
+
+        const schedule = {
+            start: start,
+            end: end
+        };
+
+        try {
+            await fetch('/api/schedule/' + device, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(schedule)
+            });
+
+            document.getElementById(device + '-schedule-value').textContent = start + ' — ' + end;
+            alert('✅ Расписание сохранено!\n' + start + ' — ' + end);
+        } catch (e) {
+            alert('❌ Ошибка сохранения расписания');
+        }
+    }
+
+    // Обновление статуса устройств
+    async function updateStatus() {
+        try {
+            const response = await fetch('/status');
+            const data = await response.json();
+
+            // Свет
+            document.getElementById('light-status').textContent = data.light.status;
+            if (data.light.energy) document.getElementById('light-energy-value').textContent = data.light.energy;
+            if (data.light.notify) document.getElementById('light-notify-count').textContent = data.light.notify;
+            if (data.light.schedule) document.getElementById('light-schedule-value').textContent = data.light.schedule;
+
+            // Термостат
+            document.getElementById('thermostat-status').textContent = data.thermo.status;
+            if (data.thermo.energy) document.getElementById('thermostat-energy-value').textContent = data.thermo.energy;
+            if (data.thermo.notify) document.getElementById('thermostat-notify-count').textContent = data.thermo.notify;
+            if (data.thermo.schedule) document.getElementById('thermostat-schedule-value').textContent = data.thermo.schedule;
+
+            // Замок
+            document.getElementById('lock-status').textContent = data.lock.status;
+            if (data.lock.energy) document.getElementById('lock-energy-value').textContent = data.lock.energy;
+            if (data.lock.notify) document.getElementById('lock-notify-count').textContent = data.lock.notify;
+            if (data.lock.schedule) document.getElementById('lock-schedule-value').textContent = data.lock.schedule;
+
+        } catch (e) {
+            console.log('Ошибка обновления статуса');
+        }
+    }
+
+    // Загрузка при старте
+    loadConfig();
+
+    // Обновление статуса каждые 3 секунды
+    setInterval(updateStatus, 3000);
+</script>
+</body>
+</html>

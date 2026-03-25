@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartHome Hub - С паттерном Decorator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 { text-align: center; color: #333; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; }
+        .device {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .device h3 { margin-top: 0; color: #444; }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background: #4CAF50;
+            color: white;
+        }
+        button:hover { background: #45a049; }
+        button.off { background: #f44336; }
+        button.off:hover { background: #da190b; }
+        button.save { background: #2196F3; }
+        button.save:hover { background: #1976D2; }
+        .status { font-weight: bold; color: #333; }
+        .info { color: #666; font-size: 0.9em; margin: 5px 0; }
+        .label { font-weight: bold; color: #555; }
+
+        .config-panel {
+            background: #e8f4f8;
+            border: 1px solid #b8d4e8;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .config-panel h4 {
+            margin-top: 0;
+            color: #2c5282;
+        }
+        .config-option {
+            display: inline-block;
+            margin: 5px 15px 5px 0;
+        }
+        .config-option label {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        .class-info {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 0.85em;
+        }
+        .class-info strong { color: #856404; }
+
+        .energy-display { display: none; }
+        .notify-display { display: none; }
+        .timer-display { display: none; }
+        .schedule-inputs { display: none; }
+
+        .energy-display.show { display: block; }
+        .notify-display.show { display: block; }
+        .timer-display.show { display: block; }
+        .schedule-inputs.show { display: block; }
+    </style>
+</head>
+<body>
+<h1>🏠 SmartHome Hub</h1>
+
+<!-- Свет -->
+<div class="device" id="device-light">
+    <h3>💡 Свет</h3>
+
+    <div class="class-info">
+        Сейчас используется: <span id="light-class-name">Light</span>
+    </div>
+
+    <div class="config-panel">
+        <h4>⚙️ Конфигурация (выберите функции)</h4>
+        <div class="config-option">
+            <input type="checkbox" id="light-energy" onchange="toggleFieldVisibility('light', 'energy', this.checked)">
+            <label for="light-energy">💡 EnergySaving</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="light-notify" onchange="toggleFieldVisibility('light', 'notify', this.checked)">
+            <label for="light-notify">📱 Notification</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="light-timer" onchange="toggleScheduleInputs('light')">
+            <label for="light-timer">⏰ Timer</label>
+        </div>
+
+        <div class="schedule-inputs" id="light-schedule-inputs">
+            <label>⏰ Расписание:</label>
+            <input type="time" id="light-schedule-start" value="08:00">
+            <span> — </span>
+            <input type="time" id="light-schedule-end" value="22:00">
+        </div>
+
+        <br>
+        <button class="save" onclick="saveConfig('light')">💾 Применить конфигурацию</button>
+    </div>
+
+    <p><span class="label">Статус:</span> <span id="light-status">ВЫКЛ</span></p>
+
+    <p class="energy-display info-light-energy">
+        <span class="label">Энергия:</span> <span id="light-energy-value">0 Вт·ч</span>
+    </p>
+    <p class="notify-display info-light-notify">
+        <span class="label">Уведомления:</span> <span id="light-notify-count">0</span>
+    </p>
+    <p class="timer-display info-light-timer">
+        <span class="label">Расписание:</span> <span id="light-schedule-value">-</span>
+    </p>
+
+    <button onclick="fetch('/light/on')">Включить</button>
+    <button class="off" onclick="fetch('/light/off')">Выключить</button>
+</div>
+
+<!-- Термостат -->
+<div class="device" id="device-thermostat">
+    <h3>🌡️ Термостат</h3>
+
+    <div class="class-info">
+        Сейчас используется: <span id="thermostat-class-name">Thermostat</span>
+    </div>
+
+    <div class="config-panel">
+        <h4>⚙️ Конфигурация (выберите функции)</h4>
+        <div class="config-option">
+            <input type="checkbox" id="thermostat-energy" onchange="toggleFieldVisibility('thermostat', 'energy', this.checked)">
+            <label for="thermostat-energy">💡 EnergySaving</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="thermostat-notify" onchange="toggleFieldVisibility('thermostat', 'notify', this.checked)">
+            <label for="thermostat-notify">📱 Notification</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="thermostat-timer" onchange="toggleScheduleInputs('thermostat')">
+            <label for="thermostat-timer">⏰ Timer</label>
+        </div>
+
+        <div class="schedule-inputs" id="thermostat-schedule-inputs">
+            <label>⏰ Расписание:</label>
+            <input type="time" id="thermostat-schedule-start" value="08:00">
+            <span> — </span>
+            <input type="time" id="thermostat-schedule-end" value="22:00">
+        </div>
+
+        <br>
+        <button class="save" onclick="saveConfig('thermostat')">💾 Применить конфигурацию</button>
+    </div>
+
+    <p><span class="label">Статус:</span> <span id="thermostat-status">ВЫКЛ</span></p>
+
+    <p class="energy-display info-thermostat-energy">
+        <span class="label">Энергия:</span> <span id="thermostat-energy-value">0 Вт·ч</span>
+    </p>
+    <p class="notify-display info-thermostat-notify">
+        <span class="label">Уведомления:</span> <span id="thermostat-notify-count">0</span>
+    </p>
+    <p class="timer-display info-thermostat-timer">
+        <span class="label">Расписание:</span> <span id="thermostat-schedule-value">-</span>
+    </p>
+
+    <button onclick="fetch('/thermostat/on')">Включить</button>
+    <button class="off" onclick="fetch('/thermostat/off')">Выключить</button>
+</div>
+
+<!-- Замок -->
+<div class="device" id="device-lock">
+    <h3>🔒 Замок</h3>
+
+    <div class="class-info">
+        Сейчас используется: <span id="lock-class-name">Lock</span>
+    </div>
+
+    <div class="config-panel">
+        <h4>⚙️ Конфигурация (выберите функции)</h4>
+        <div class="config-option">
+            <input type="checkbox" id="lock-energy" onchange="toggleFieldVisibility('lock', 'energy', this.checked)">
+            <label for="lock-energy">💡 EnergySaving</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="lock-notify" onchange="toggleFieldVisibility('lock', 'notify', this.checked)">
+            <label for="lock-notify">📱 Notification</label>
+        </div>
+        <div class="config-option">
+            <input type="checkbox" id="lock-timer" onchange="toggleScheduleInputs('lock')">
+            <label for="lock-timer">⏰ Timer</label>
+        </div>
+
+        <div class="schedule-inputs" id="lock-schedule-inputs">
+            <label>⏰ Расписание:</label>
+            <input type="time" id="lock-schedule-start" value="08:00">
+            <span> — </span>
+            <input type="time" id="lock-schedule-end" value="22:00">
+        </div>
+
+        <br>
+        <button class="save" onclick="saveConfig('lock')">💾 Применить конфигурацию</button>
+    </div>
+
+    <p><span class="label">Статус:</span> <span id="lock-status">ОТКРЫТ</span></p>
+
+    <p class="energy-display info-lock-energy">
+        <span class="label">Энергия:</span> <span id="lock-energy-value">0 Вт·ч</span>
+    </p>
+    <p class="notify-display info-lock-notify">
+        <span class="label">Уведомления:</span> <span id="lock-notify-count">0</span>
+    </p>
+    <p class="timer-display info-lock-timer">
+        <span class="label">Расписание:</span> <span id="lock-schedule-value">-</span>
+    </p>
+
+    <button onclick="fetch('/lock/on')">Закрыть</button>
+    <button class="off" onclick="fetch('/lock/off')">Открыть</button>
+</div>
+
+<script>
+    function toggleFieldVisibility(device, field, isVisible) {
+        const displayP = document.querySelector('.info-' + device + '-' + field);
+        if (displayP) {
+            if (isVisible) {
+                displayP.classList.add('show');
+            } else {
+                displayP.classList.remove('show');
+            }
+        }
+    }
+
+    function toggleScheduleInputs(device) {
+        const timerChecked = document.getElementById(device + '-timer').checked;
+        const inputsDiv = document.getElementById(device + '-schedule-inputs');
+        const displayP = document.querySelector('.info-' + device + '-timer');
+
+        if (timerChecked) {
+            inputsDiv.classList.add('show');
+            displayP.classList.add('show');
+        } else {
+            inputsDiv.classList.remove('show');
+            displayP.classList.remove('show');
+        }
+    }
+
+    function getClassName(device, energy, notify, timer) {
+        const parts = [];
+        if (energy) parts.push('Energy');
+        if (notify) parts.push('Notify');
+        if (timer) parts.push('Timer');
+
+        let className = device.charAt(0).toUpperCase() + device.slice(1);
+        return parts.length > 0 ? parts.join('') + className : className;
+    }
+
+    async function loadConfig() {
+        try {
+            const response = await fetch('/api/config');
+            const data = await response.json();
+
+            // Свет
+            document.getElementById('light-energy').checked = data.light.energy;
+            document.getElementById('light-notify').checked = data.light.notify;
+            document.getElementById('light-timer').checked = data.light.timer;
+            document.getElementById('light-schedule-start').value = data.light.scheduleStart || '08:00';
+            document.getElementById('light-schedule-end').value = data.light.scheduleEnd || '22:00';
+
+            toggleFieldVisibility('light', 'energy', data.light.energy);
+            toggleFieldVisibility('light', 'notify', data.light.notify);
+            toggleScheduleInputs('light');
+
+            document.getElementById('light-class-name').textContent =
+                getClassName('light', data.light.energy, data.light.notify, data.light.timer);
+
+            // Термостат ✅ ИСПРАВЛЕНО: было data.thermo
+            document.getElementById('thermostat-energy').checked = data.thermostat.energy;
+            document.getElementById('thermostat-notify').checked = data.thermostat.notify;
+            document.getElementById('thermostat-timer').checked = data.thermostat.timer;
+            document.getElementById('thermostat-schedule-start').value = data.thermostat.scheduleStart || '08:00';
+            document.getElementById('thermostat-schedule-end').value = data.thermostat.scheduleEnd || '22:00';
+
+            toggleFieldVisibility('thermostat', 'energy', data.thermostat.energy);
+            toggleFieldVisibility('thermostat', 'notify', data.thermostat.notify);
+            toggleScheduleInputs('thermostat');
+
+            document.getElementById('thermostat-class-name').textContent =
+                getClassName('thermostat', data.thermostat.energy, data.thermostat.notify, data.thermostat.timer);
+
+            // Замок
+            document.getElementById('lock-energy').checked = data.lock.energy;
+            document.getElementById('lock-notify').checked = data.lock.notify;
+            document.getElementById('lock-timer').checked = data.lock.timer;
+            document.getElementById('lock-schedule-start').value = data.lock.scheduleStart || '08:00';
+            document.getElementById('lock-schedule-end').value = data.lock.scheduleEnd || '22:00';
+
+            toggleFieldVisibility('lock', 'energy', data.lock.energy);
+            toggleFieldVisibility('lock', 'notify', data.lock.notify);
+            toggleScheduleInputs('lock');
+
+            document.getElementById('lock-class-name').textContent =
+                getClassName('lock', data.lock.energy, data.lock.notify, data.lock.timer);
+
+        } catch (e) {
+            console.log('Конфигурация не загружена (используются значения по умолчанию)');
+            toggleFieldVisibility('light', 'energy', false);
+            toggleFieldVisibility('light', 'notify', false);
+            toggleScheduleInputs('light');
+            toggleFieldVisibility('thermostat', 'energy', false);
+            toggleFieldVisibility('thermostat', 'notify', false);
+            toggleScheduleInputs('thermostat');
+            toggleFieldVisibility('lock', 'energy', false);
+            toggleFieldVisibility('lock', 'notify', false);
+            toggleScheduleInputs('lock');
+        }
+    }
+
+    async function saveConfig(device) {
+        const config = {
+            energy: document.getElementById(device + '-energy').checked,
+            notify: document.getElementById(device + '-notify').checked,
+            timer: document.getElementById(device + '-timer').checked,
+            scheduleStart: document.getElementById(device + '-schedule-start').value,
+            scheduleEnd: document.getElementById(device + '-schedule-end').value
+        };
+
+        try {
+            await fetch('/api/config/' + device, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(config)
+            });
+
+            document.getElementById(device + '-class-name').textContent =
+                getClassName(device, config.energy, config.notify, config.timer);
+
+            toggleFieldVisibility(device, 'energy', config.energy);
+            toggleFieldVisibility(device, 'notify', config.notify);
+            toggleScheduleInputs(device);
+
+            if (config.timer) {
+                document.getElementById(device + '-schedule-value').textContent =
+                    config.scheduleStart + ' — ' + config.scheduleEnd;
+            }
+
+            const className = getClassName(device, config.energy, config.notify, config.timer);
+            alert('✅ Конфигурация применена!\nСоздан класс: ' + className + '\n\n' +
+                '✨ Преимущество Decorator: динамическая композиция без 24 классов!');
+        } catch (e) {
+            alert('❌ Ошибка применения конфигурации');
+        }
+    }
+
+    async function updateStatus() {
+        try {
+            const response = await fetch('/status');
+            const data = await response.json();
+
+            // Свет
+            document.getElementById('light-status').textContent = data.light.status;
+            if (data.light.energy) document.getElementById('light-energy-value').textContent = data.light.energy;
+            if (data.light.notify) document.getElementById('light-notify-count').textContent = data.light.notify;
+            if (data.light.schedule) document.getElementById('light-schedule-value').textContent = data.light.schedule;
+
+            // Термостат ✅ ИСПРАВЛЕНО: было data.thermo
+            document.getElementById('thermostat-status').textContent = data.thermostat.status;
+            if (data.thermostat.energy) document.getElementById('thermostat-energy-value').textContent = data.thermostat.energy;
+            if (data.thermostat.notify) document.getElementById('thermostat-notify-count').textContent = data.thermostat.notify;
+            if (data.thermostat.schedule) document.getElementById('thermostat-schedule-value').textContent = data.thermostat.schedule;
+
+            // Замок
+            document.getElementById('lock-status').textContent = data.lock.status;
+            if (data.lock.energy) document.getElementById('lock-energy-value').textContent = data.lock.energy;
+            if (data.lock.notify) document.getElementById('lock-notify-count').textContent = data.lock.notify;
+            if (data.lock.schedule) document.getElementById('lock-schedule-value').textContent = data.lock.schedule;
+
+        } catch (e) {
+            console.log('Ошибка обновления статуса');
+        }
+    }
+
+    loadConfig();
+    setInterval(updateStatus, 1000);
+</script>
+</body>
+</html>
