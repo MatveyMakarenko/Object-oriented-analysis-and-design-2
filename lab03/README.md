@@ -28,15 +28,15 @@
 
 Процесс организации доступа к задачам реализуется с помощью паттерна Итератор (Iterator):
 
-Iterator — базовый интерфейс итератора, определяющий методы has_next(), next(), previous(), reset(), current_index(), total()
+1.Iterator — базовый интерфейс итератора, определяющий методы has_next(), next(), previous(), reset(), current_index(), total()
 
-Конкретные итераторы (AllTasksIterator, ActiveTasksIterator, PriorityTasksIterator, CategoryTasksIterator) реализуют различные стратегии перебора коллекции
+2.Конкретные итераторы (AllTasksIterator, ActiveTasksIterator, PriorityTasksIterator, CategoryTasksIterator) реализуют различные стратегии перебора коллекции
 
-TaskCollection — интерфейс коллекции с методом create_iterator()
+3.TaskCollection — интерфейс коллекции с методом create_iterator()
 
-TaskManager — конкретная коллекция, хранящая задачи и создающая нужный тип итератора по запросу
+4.TaskManager — конкретная коллекция, хранящая задачи и создающая нужный тип итератора по запросу
 
-Task — модель задачи с атрибутами (title, category, priority, status, duration)
+5.Task — модель задачи с атрибутами (title, category, priority, status, duration)
 
 Результат — гибкая система просмотра задач с возможностью переключения режимов отображения без изменения класса коллекции, отображаемая в GUI с возможностью добавления/удаления/редактирования задач.
 
