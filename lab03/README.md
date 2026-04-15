@@ -45,6 +45,7 @@
 Диаграмма классов
 
 	 
-<img width="991" height="647" alt="image" src="https://github.com/user-attachments/assets/2ccda8d6-8a49-4901-ab3b-f19888db1582" />
+<img width="991" height="707" alt="image" src="https://github.com/user-attachments/assets/fa4a7037-472b-4fd3-9d9c-11bc7fcef847" />
+
 
 
