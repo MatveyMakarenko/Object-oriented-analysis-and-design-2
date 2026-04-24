@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Позвонить клиенту",
+    "category": "Работа",
+    "priority": "Высокий",
+    "status": "Активно",
+    "duration": 0
+  },
+  {
+    "title": "Прочитать книгу",
+    "category": "Личное",
+    "priority": "Низкий",
+    "status": "Активно",
+    "duration": 0
+  },
+  {
+    "title": "Подготовить презентацию",
+    "category": "Работа",
+    "priority": "Высокий",
+    "status": "Активно",
+    "duration": 0
+  },
+  {
+    "title": "Убрать квартиру",
+    "category": "Дом",
+    "priority": "Средний",
+    "status": "Активно",
+    "duration": 0
+  }
+]
