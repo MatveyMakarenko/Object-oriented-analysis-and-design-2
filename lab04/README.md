@@ -24,10 +24,10 @@
 •	Database (DAO) — абстракция базы данных, выполняющая SQL-запросы.
 
 
-Диаграмма классов
+## Диаграмма классов
 
 	 
-<img width="991" height="707" alt="image" src="https://github.com/user-attachments/assets/4b1da89f-c1fe-4128-b06f-2cd51ba64654" />
+<img width="800" height="507" alt="image" src="https://github.com/user-attachments/assets/4b1da89f-c1fe-4128-b06f-2cd51ba64654" />
 
 
 
