@@ -26,7 +26,8 @@
 
 ## Диаграмма классов
 
-<img width="1067" height="287" alt="image" src="https://github.com/user-attachments/assets/ba8399a6-ab2e-46f7-9dac-df0356867196" />
+<img width="1067" height="318" alt="image" src="https://github.com/user-attachments/assets/28d8d71a-5c9f-40af-9a6a-faf8fa8482b2" />
+
 
 
 
