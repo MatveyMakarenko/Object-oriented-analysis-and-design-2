@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineCatalog - Eager Loading</title>
+    <style>
+        :root { --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; --accent: #e50914; --sec: #888; --green: #46d369; }
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); display: flex; height: 100vh; }
+        
+        #sidebar { width: 350px; background: var(--card); border-right: 1px solid #333; display: flex; flex-direction: column; }
+        .logo { padding: 20px; font-weight: bold; color: var(--accent); font-size: 1.3em; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 10px; }
+        .search { padding: 15px; border-bottom: 1px solid #333; }
+        .search input { width: 100%; padding: 10px; background: #2a2a2a; border: 1px solid #333; color: white; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
+        .search input:focus { outline: none; border-color: var(--accent); }
+        
+        #list { flex: 1; overflow-y: auto; padding: 0; margin: 0; list-style: none; }
+        .item { padding: 12px 15px; cursor: pointer; border-bottom: 1px solid #2a2a2a; font-size: 0.95em; transition: all 0.2s; }
+        .item:hover { background: #2a2a2a; }
+        .item.active { background: #2a2a2a; border-left: 3px solid var(--accent); }
+        .year { color: var(--sec); font-size: 0.85em; margin-left: 5px; }
+        
+        #stats { 
+            padding: 12px 15px; 
+            background: #181818; 
+            border-top: 1px solid #333; 
+            font-size: 0.8em; 
+            color: var(--green);
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .metric { display: flex; align-items: center; gap: 5px; }
+        .metric-value { font-weight: bold; }
+        
+        #main { flex: 1; padding: 40px; overflow-y: auto; }
+        .hidden { display: none; }
+        
+        h1 { margin-top: 0; font-size: 2.5em; font-weight: 700; }
+        .meta { color: var(--sec); margin-bottom: 20px; font-size: 1em; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .tag { background: #333; padding: 4px 10px; margin: 3px; border-radius: 4px; font-size: 0.85em; }
+        
+        .desc-box { 
+            background: #1e1e1e; 
+            padding: 20px; 
+            border-radius: 8px; 
+            border-left: 4px solid var(--accent); 
+            margin-bottom: 30px; 
+            line-height: 1.6;
+            font-size: 1.05em;
+        }
+        
+        .section { margin-top: 25px; border: 1px solid #333; border-radius: 8px; overflow: hidden; }
+        .head { 
+            padding: 15px 20px; 
+            background: #252525; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .head:hover { background: #2a2a2a; }
+        .head-left { display: flex; align-items: center; gap: 10px; }
+        .badge { 
+            background: var(--accent); 
+            color: white; 
+            padding: 3px 10px; 
+            border-radius: 12px; 
+            font-size: 0.85em; 
+            font-weight: bold;
+            min-width: 28px;
+            text-align: center;
+        }
+        .arrow { transition: transform 0.3s; color: var(--sec); }
+        .arrow.open { transform: rotate(180deg); }
+        
+        .content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #181818; }
+        .content.open { max-height: 2000px; }
+        
+        .card { padding: 15px 20px; border-bottom: 1px solid #2a2a2a; }
+        .card:last-child { border-bottom: none; }
+        .rating { color: var(--green); font-weight: bold; margin-right: 8px; font-size: 1.1em; }
+        .author { font-weight: 600; color: #fff; }
+        
+        .actor { 
+            display: inline-flex; 
+            align-items: center;
+            background: #252525; 
+            padding: 8px 15px; 
+            margin: 5px; 
+            border-radius: 20px; 
+            border: 1px solid #333;
+            gap: 8px;
+        }
+        .actor-name { font-weight: 600; color: #fff; }
+        .actor-role { color: var(--sec); font-size: 0.9em; }
+        
+        #placeholder { margin-top: 150px; text-align: center; color: var(--sec); }
+        #placeholder h1 { color: #555; }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <div class="logo">🎬 CINECATALOG</div>
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="🔍 Поиск фильма...">
+        </div>
+        <ul id="list"><li class="item">Загрузка...</li></ul>
+        <div id="stats">
+            <span class="metric">📦 <span class="metric-value" id="stat-count">0</span> фильмов</span>
+            <span class="metric">💾 <span class="metric-value" id="stat-size">0</span> KB</span>
+            <span class="metric">⚡ <span class="metric-value" id="stat-time">0</span> ms</span>
+        </div>
+    </div>
+    
+    <div id="main">
+        <div id="placeholder">
+            <h1>Выберите фильм</h1>
+            <p>Кликните на название слева для просмотра деталей<br>
+            <span style="font-size:0.8em; color:#666">(Данные загружены мгновенно - Eager Loading)</span></p>
+        </div>
+        
+        <div id="details" class="hidden">
+            <h1 id="d-title">Title</h1>
+            <div class="meta">
+                <span id="d-year">1990</span>
+                <span>•</span>
+                <span id="d-runtime">120 мин</span>
+                <span>•</span>
+                <span id="d-genre"></span>
+            </div>
+            <div class="desc-box" id="d-desc">...</div>
+
+            <div class="section">
+                <div class="head" onclick="toggle('reviews')">
+                    <div class="head-left">⭐ Отзывы</div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span class="badge" id="rev-count">0</span>
+                        <span class="arrow" id="rev-arrow">▼</span>
+                    </div>
+                </div>
+                <div class="content" id="reviews"><div class="card">Загрузка...</div></div>
+            </div>
+
+            <div class="section">
+                <div class="head" onclick="toggle('actors')">
+                    <div class="head-left">🎭 Актёры</div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span class="badge" id="act-count">0</span>
+                        <span class="arrow" id="act-arrow">▼</span>
+                    </div>
+                </div>
+                <div class="content" id="actors"><div class="card">Загрузка...</div></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const listEl = document.getElementById('list');
+        const detailsEl = document.getElementById('details');
+        const placeholderEl = document.getElementById('placeholder');
+        const searchInput = document.getElementById('searchInput');
+        const startTime = performance.now();
+        let allMovies = [];
+
+        // 1. Загрузка ВСЕХ данных сразу (EAGER LOADING)
+        fetch('/api/movies')
+            .then(res => res.json())
+            .then(movies => {
+                allMovies = movies;
+                const loadTime = Math.round(performance.now() - startTime);
+                const sizeKB = Math.round(JSON.stringify(movies).length / 1024);
+                
+                document.getElementById('stat-count').innerText = movies.length;
+                document.getElementById('stat-size').innerText = sizeKB;
+                document.getElementById('stat-time').innerText = loadTime;
+                
+                renderList(movies);
+                
+                console.log(`✅ EAGER LOADING: Загружено ${movies.length} фильмов за ${loadTime}ms (${sizeKB} KB)`);
+                console.log("Теперь данные не грузятся по клику, они уже в памяти!");
+            })
+            .catch(err => {
+                console.error("❌ Ошибка:", err);
+                listEl.innerHTML = '<li class="item" style="color: #e50914">Ошибка загрузки</li>';
+            });
+
+        // 2. Поиск (работает локально, без запросов)
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            
+            if (query === '') {
+                renderList(allMovies);
+            } else {
+                const filtered = allMovies.filter(m => 
+                    m.title.toLowerCase().includes(query)
+                );
+                renderList(filtered);
+            }
+        });
+
+        function renderList(movies) {
+            listEl.innerHTML = '';
+            if (movies.length === 0) {
+                listEl.innerHTML = '<li class="item" style="color: #888; text-align: center;">Ничего не найдено</li>';
+                return;
+            }
+            
+            movies.forEach(m => {
+                const li = document.createElement('li');
+                li.className = 'item';
+                li.innerHTML = `${m.title} <span class="year">(${m.year})</span>`;
+                li.onclick = () => loadMovie(m, li);
+                listEl.appendChild(li);
+            });
+        }
+
+        // 3. Показ деталей (БЕЗ ЗАПРОСОВ - данные уже есть)
+        function loadMovie(movie, liElement) {
+            document.querySelectorAll('.item').forEach(i => i.classList.remove('active'));
+            liElement.classList.add('active');
+            placeholderEl.classList.add('hidden');
+            detailsEl.classList.remove('hidden');
+            
+            // Рендерим мгновенно из памяти
+            document.getElementById('d-title').innerText = movie.title;
+            document.getElementById('d-year').innerText = movie.year;
+            document.getElementById('d-runtime').innerText = (movie.runtime || 0) + " мин";
+            
+            const genres = (movie.genre || "Unknown").split(',');
+            document.getElementById('d-genre').innerHTML = genres.map(g => `<span class="tag">${g.trim()}</span>`).join('');
+            document.getElementById('d-desc').innerText = movie.desc || "Описание отсутствует.";
+
+            // Отзывы (из памяти)
+            const revBox = document.getElementById('reviews');
+            revBox.innerHTML = '';
+            document.getElementById('rev-count').innerText = (movie.reviews || []).length;
+            
+            if (!movie.reviews || movie.reviews.length === 0) {
+                revBox.innerHTML = '<div class="card" style="color: #888">Нет отзывов</div>';
+            } else {
+                movie.reviews.forEach(r => {
+                    revBox.innerHTML += `
+                        <div class="card">
+                            <span class="rating">${r.rating.toFixed(1)}/10</span>
+                            <span class="author">${r.author}</span>
+                            <div style="margin-top: 5px; color: #aaa">${r.text}</div>
+                        </div>`;
+                });
+            }
+
+            // Актёры (из памяти)
+            const actBox = document.getElementById('actors');
+            actBox.innerHTML = '';
+            document.getElementById('act-count').innerText = (movie.actors || []).length;
+            
+            if (!movie.actors || movie.actors.length === 0) {
+                actBox.innerHTML = '<div class="card" style="color: #888">Нет данных</div>';
+            } else {
+                movie.actors.forEach(a => {
+                    actBox.innerHTML += `
+                        <span class="actor">
+                            <span class="actor-name">${a.name}</span>
+                            <span class="actor-role">as ${a.role}</span>
+                        </span>`;
+                });
+            }
+            
+            console.log(`🎬 Показан: ${movie.title} (0ms, данные в памяти)`);
+        }
+
+        // Аккордеон
+        function toggle(sectionId) {
+            const content = document.getElementById(sectionId);
+            const arrow = document.getElementById(sectionId.replace('reviews', 'rev').replace('actors', 'act') + '-arrow');
+            
+            const isOpen = content.classList.contains('open');
+            document.querySelectorAll('.content').forEach(c => c.classList.remove('open'));
+            document.querySelectorAll('.arrow').forEach(a => a.classList.remove('open'));
+            
+            if (!isOpen) {
+                content.classList.add('open');
+                arrow.classList.add('open');
+            }
+        }
+    </script>
+</body>
+</html>
