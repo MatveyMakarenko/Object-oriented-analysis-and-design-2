@@ -1,0 +1,401 @@
+movie_imdb_id	actor_name	role_name
+tt0111161	Tim Robbins	Andy Dufresne
+tt0111161	Morgan Freeman	Ellis Boyd 'Red' Redding
+tt0111161	Bob Gunton	Warden Norton
+tt0111161	William Sadler	Heywood
+tt0111161	Clancy Brown	Captain Hadley
+tt0111161	Gil Bellows	Tommy Williams
+tt0111161	James Whitmore	Brooks Hatlen
+tt0111161	Mark Rolston	Bogs Diamond
+tt0068646	Marlon Brando	Vito Corleone
+tt0068646	Al Pacino	Michael Corleone
+tt0068646	James Caan	Sonny Corleone
+tt0068646	Robert Duvall	Tom Hagen
+tt0068646	Diane Keaton	Kay Adams
+tt0068646	Richard S. Castellano	Clemenza
+tt0068646	Talia Shire	Connie Corleone
+tt0068646	John Marley	Jack Woltz
+tt0468569	Christian Bale	Bruce Wayne / Batman
+tt0468569	Heath Ledger	The Joker
+tt0468569	Aaron Eckhart	Harvey Dent
+tt0468569	Gary Oldman	James Gordon
+tt0468569	Maggie Gyllenhaal	Rachel Dawes
+tt0468569	Michael Caine	Alfred Pennyworth
+tt0468569	Morgan Freeman	Lucius Fox
+tt0468569	Cillian Murphy	Dr. Jonathan Crane
+tt0071562	Al Pacino	Michael Corleone
+tt0071562	Robert De Niro	Vito Corleone
+tt0071562	Robert Duvall	Tom Hagen
+tt0071562	Diane Keaton	Kay Adams-Corleone
+tt0071562	Lee Strasberg	Hyman Roth
+tt0071562	Frank Forster	Frank Pentangeli
+tt0071562	Talia Shire	Connie Corleone
+tt0071562	Michael V. Gazzo	Frank Pentangeli's Brother
+tt0050083	Henry Fonda	Juror 8
+tt0050083	Lee J. Cobb	Juror 3
+tt0050083	Martin Balsam	Juror 1
+tt0050083	E.G. Marshall	Juror 4
+tt0050083	Jack Warden	Juror 7
+tt0050083	Ed Begley	Juror 10
+tt0050083	Joseph Sweeney	Juror 9
+tt0050083	Tony Klugman	Juror 5
+tt0108052	Liam Neeson	Oskar Schindler
+tt0108052	Ralph Fiennes	Amon Göth
+tt0108052	Ben Kingsley	Itzhak Stern
+tt0108052	Caroline Goodall	Emilie Schindler
+tt0108052	Jonathan Sagall	Poldek Pfefferberg
+tt0108052	Embeth Davidtz	Helen Hirsch
+tt0108052	Malgoscha Gebel	Victoria Klonowska
+tt0108052	Mark Ivanir	Marcel Goldberg
+tt0167260	Elijah Wood	Frodo Baggins
+tt0167260	Viggo Mortensen	Aragorn
+tt0167260	Ian McKellen	Gandalf
+tt0167260	Sean Astin	Samwise Gamgee
+tt0167260	Orlando Bloom	Legolas
+tt0167260	John Rhys-Davies	Gimli
+tt0167260	Dominic Monaghan	Merry
+tt0167260	Billy Boyd	Pippin
+tt0110912	John Travolta	Vincent Vega
+tt0110912	Samuel L. Jackson	Jules Winnfield
+tt0110912	Uma Thurman	Mia Wallace
+tt0110912	Bruce Willis	Butch Coolidge
+tt0110912	Harvey Keitel	Winston 'The Wolf' Wolfe
+tt0110912	Tim Roth	Pumpkin
+tt0110912	Amanda Plummer	Honey Bunny
+tt0110912	Maria de Medeiros	Fabienne
+tt0120737	Elijah Wood	Frodo Baggins
+tt0120737	Ian McKellen	Gandalf
+tt0120737	Viggo Mortensen	Aragorn
+tt0120737	Sean Bean	Boromir
+tt0120737	Sean Astin	Samwise Gamgee
+tt0120737	Orlando Bloom	Legolas
+tt0120737	John Rhys-Davies	Gimli
+tt0120737	Dominic Monaghan	Merry
+tt0060196	Clint Eastwood	Blondie
+tt0060196	Lee Van Cleef	Angel Eyes
+tt0060196	Eli Wallach	Tuco
+tt0060196	Aldo Giuffrè	Captain Clinton
+tt0060196	Luigi Pistilli	Father Pablo Ramirez
+tt0060196	Rada Rassimov	Maria
+tt0060196	Enzo Petito	Storekeeper
+tt0060196	Claudio Scarchilli	Stoner
+tt0109830	Tom Hanks	Forrest Gump
+tt0109830	Robin Wright	Jenny Curran
+tt0109830	Gary Sinise	Lieutenant Dan Taylor
+tt0109830	Sally Field	Mrs. Gump
+tt0109830	Mykelti Williamson	Bubba Blue
+tt0109830	Haley Joel Osment	Forrest Gump Jr.
+tt0109830	Michael Conner Humphreys	Young Forrest
+tt0109830	Hanna Hall	Young Jenny
+tt1375666	Leonardo DiCaprio	Dom Cobb
+tt1375666	Joseph Gordon-Levitt	Arthur
+tt1375666	Elliot Page	Ariadne
+tt1375666	Tom Hardy	Eames
+tt1375666	Ken Watanabe	Saito
+tt1375666	Cillian Murphy	Robert Fischer
+tt1375666	Michael Caine	Professor Miles
+tt1375666	Marion Cotillard	Mal
+tt0167261	Elijah Wood	Frodo Baggins
+tt0167261	Viggo Mortensen	Aragorn
+tt0167261	Ian McKellen	Gandalf
+tt0167261	Sean Astin	Samwise Gamgee
+tt0167261	Andy Serkis	Gollum
+tt0167261	Orlando Bloom	Legolas
+tt0167261	John Rhys-Davies	Gimli
+tt0167261	Bernard Hill	Theoden
+tt0137523	Brad Pitt	Tyler Durden
+tt0137523	Edward Norton	The Narrator
+tt0137523	Helena Bonham Carter	Marla Singer
+tt0137523	Meat Loaf	Robert Paulson
+tt0137523	Jared Leto	Angel Face
+tt0137523	Zach Grenier	Richard Chesler
+tt0137523	Holt McCallany	The Mechanic
+tt0137523	Eion Bailey	Ricky
+tt0133093	Keanu Reeves	Neo
+tt0133093	Laurence Fishburne	Morpheus
+tt0133093	Carrie-Anne Moss	Trinity
+tt0133093	Hugo Weaving	Agent Smith
+tt0133093	Joe Pantoliano	Cypher
+tt0133093	Marcus Chong	Tank
+tt0133093	Julian Arahanga	Apoc
+tt0133093	Matt Doran	Mouse
+tt0099685	Robert De Niro	James Conway
+tt0099685	Ray Liotta	Henry Hill
+tt0099685	Joe Pesci	Tommy DeVito
+tt0099685	Lorraine Bracco	Karen Hill
+tt0099685	Paul Sorvino	Paulie
+tt0099685	Frank Sivero	Frankie Carbone
+tt0099685	Tony Darrow	Sonny Bunz
+tt0099685	Mike Starr	Frenchy
+tt0076759	Mark Hamill	Luke Skywalker
+tt0076759	Harrison Ford	Han Solo
+tt0076759	Carrie Fisher	Princess Leia
+tt0076759	Alec Guinness	Obi-Wan Kenobi
+tt0076759	Peter Cushing	Grand Moff Tarkin
+tt0076759	Anthony Daniels	C-3PO
+tt0076759	Kenny Baker	R2-D2
+tt0076759	Peter Mayhew	Chewbacca
+tt0073486	Jack Nicholson	Randle McMurphy
+tt0073486	Louise Fletcher	Nurse Ratched
+tt0073486	Brad Dourif	Billy Bibbit
+tt0073486	William Redfield	Harding
+tt0073486	Danny DeVito	Martini
+tt0073486	Christopher Lloyd	Taber
+tt0073486	Will Sampson	Chief Bromden
+tt0073486	Scatman Crothers	Turkle
+tt0114369	Morgan Freeman	Detective Somerset
+tt0114369	Brad Pitt	Detective Mills
+tt0114369	Kevin Spacey	John Doe
+tt0114369	Gwyneth Paltrow	Tracy Mills
+tt0114369	John C. McGinley	Captain California
+tt0114369	Leland Orser	O'Neil
+tt0114369	Richard Roundtree	District Attorney
+tt0114369	Richard Schiff	Mark Swarr
+tt0047478	Toshiro Mifune	Kikuchiyo
+tt0047478	Takashi Shimura	Kambei Shimada
+tt0047478	Yoshio Inaba	Gorobei Katayama
+tt0047478	Seiji Miyaguchi	Kyuzo
+tt0047478	Daisuke Kato	Shichiroji
+tt0047478	Minoru Chiaki	Heihachi Hayashida
+tt0047478	Ko Kimura	Katsushiro Okamoto
+tt0047478	Kamatari Fujiwara	Gisaku
+tt0102926	Jodie Foster	Clarice Starling
+tt0102926	Anthony Hopkins	Dr. Hannibal Lecter
+tt0102926	Scott Glenn	Jack Crawford
+tt0102926	Ted Levine	Buffalo Bill
+tt0102926	Anthony Heald	Dr. Chilton
+tt0102926	Brooke Smith	Catherine Martin
+tt0102926	Kasi Lemmons	Ardelia Mapp
+tt0102926	Frankie Faison	Barney Matthews
+tt0317248	Alexandre Rodrigues	Rocket
+tt0317248	Leandro Firmino	Li'l Zé
+tt0317248	Phellipe Haagensen	Benny
+tt0317248	Douglas Silva	Dadinho
+tt0317248	Jonathan Haagensen	Crocó
+tt0317248	Matías Nachtergaele	Carreirinha
+tt0317248	Seu Jorge	Knockout Ned
+tt0317248	Alice Braga	Angélica
+tt0038650	James Stewart	George Bailey
+tt0038650	Donna Reed	Mary Hatch
+tt0038650	Lionel Barrymore	Mr. Potter
+tt0038650	Thomas Mitchell	Uncle Billy
+tt0038650	Henry Travers	Clarence Odbody
+tt0038650	Beulah Bondi	Mrs. Bailey
+tt0038650	Frank Faylen	Ernie Bishop
+tt0038650	Gloria Grahame	Violet Bick
+tt0118799	Roberto Benigni	Guido Orefice
+tt0118799	Nicoletta Braschi	Dora
+tt0118799	Giorgio Cantarini	Giosué Orefice
+tt0118799	Giustino Durano	Uncle Eliseo
+tt0118799	Sergio Bini Bustric	Ferruccio
+tt0118799	Marisa Paredes	Dora's Mother
+tt0118799	Horst Buchholz	Dr. Lessing
+tt0118799	Lidia Alfonsi	Guicciardini
+tt0114814	Kevin Spacey	Roger 'Verbal' Kint
+tt0114814	Gabriel Byrne	Dean Keaton
+tt0114814	Chazz Palminteri	Dave Kujan
+tt0114814	Stephen Baldwin	McManus
+tt0114814	Benicio del Toro	Fenster
+tt0114814	Kevin Pollak	Hockney
+tt0114814	Pete Postlethwaite	Kobayashi
+tt0114814	Suzy Amis	Edie Finneran
+tt0110413	Jean Reno	Léon
+tt0110413	Gary Oldman	Norman Stansfield
+tt0110413	Natalie Portman	Matilda
+tt0110413	Danny Aiello	Tony
+tt0110413	Peter Appel	Malky
+tt0110413	Willi One Blood	1st Stansfield Man
+tt0110413	Don Creech	2nd Stansfield Man
+tt0110413	Keith A. Glascoe	3rd Stansfield Man
+tt0245429	Rumi Hiiragi	Chihiro Ogino
+tt0245429	Miyu Irino	Haku
+tt0245429	Mari Natsuki	Yubaba / Zeniba
+tt0245429	Bunta Sugawara	Kamaji
+tt0245429	Tatsuya Gashi	Chichiyaku
+tt0245429	Ryunosuke Kamiki	Boh
+tt0245429	Yumi Tamai	Rin
+tt0245429	Takehiko Ono	Aniyaku
+tt0120815	Tom Hanks	Captain Miller
+tt0120815	Tom Sizemore	Sergeant Horvath
+tt0120815	Edward Burns	Private Reiben
+tt0120815	Barry Pepper	Private Jackson
+tt0120815	Adam Goldberg	Private Mellish
+tt0120815	Vin Diesel	Private Caparzo
+tt0120815	Giovanni Ribisi	T-4 Medic Wade
+tt0120815	Jeremy Davies	Corporal Upham
+tt0120586	Edward Norton	Derek Vinyard
+tt0120586	Edward Furlong	Danny Vinyard
+tt0120586	Beverly D'Angelo	Doris Vinyard
+tt0120586	Avery Brooks	Dr. Sweeney
+tt0120586	Jennifer Lien	Davina Vinyard
+tt0120586	Ethan Suplee	Seth Ryan
+tt0120586	Stacy Keach	Cameron Alexander
+tt0120586	Guy Torry	Lamont
+tt0816692	Matthew McConaughey	Cooper
+tt0816692	Anne Hathaway	Brand
+tt0816692	Jessica Chastain	Murph (adult)
+tt0816692	Michael Caine	Professor Brand
+tt0816692	Matt Damon	Dr. Mann
+tt0816692	John Lithgow	Donald
+tt0816692	Mackenzie Foy	Murph (child)
+tt0816692	Cassey Affleck	Tom (adult)
+tt0054215	Anthony Perkins	Norman Bates
+tt0054215	Janet Leigh	Marion Crane
+tt0054215	Vera Miles	Lila Crane
+tt0054215	John Gavin	Sam Loomis
+tt0054215	Martin Balsam	Milton Arbogast
+tt0054215	John McIntire	Sheriff Al Chambers
+tt0054215	Simon Oakland	Dr. Fred Richmond
+tt0054215	Frank Albertson	Tom Cassidy
+tt0034583	Humphrey Bogart	Rick Blaine
+tt0034583	Ingrid Bergman	Ilsa Lund
+tt0034583	Paul Henreid	Victor Laszlo
+tt0034583	Claude Rains	Captain Renault
+tt0034583	Conrad Veidt	Major Strasser
+tt0034583	Sydney Greenstreet	Signor Ferrari
+tt0034583	Peter Lorre	Ugarte
+tt0034583	S.Z. Sakall	Carl
+tt0120689	Tom Hanks	Paul Edgecomb
+tt0120689	Michael Clarke Duncan	John Coffey
+tt0120689	David Morse	Brutus Howell
+tt0120689	Bonnie Hunt	Jan Edgecomb
+tt0120689	Doug Hutchison	Percy Wetmore
+tt0120689	Sam Rockwell	'Wild Bill' Wharton
+tt0120689	James Cromwell	Warden Hal Moores
+tt0120689	Patricia Clarkson	Melinda Moores
+tt1675434	François Cluzet	Philippe
+tt1675434	Omar Sy	Driss
+tt1675434	Anne Le Ny	Yvonne
+tt1675434	Audrey Fleurot	Magalie
+tt1675434	Clotilde Mollet	Marcelle
+tt1675434	Alba Gaïa Kraghede Bellugi	Elisa
+tt1675434	Cyril Mendy	Adama
+tt1675434	Christian Ameri	Albert
+tt0027977	Charlie Chaplin	A Factory Worker / The Tramp
+tt0027977	Paulette Goddard	A Gamine
+tt0027977	Henry Bergman	Cafe Proprietor
+tt0027977	Tiny Sandford	Big Bill
+tt0027977	Chester Conklin	Mechanic
+tt0027977	Hank Mann	Burglar
+tt0027977	Stanley Blystone	Father-in-law
+tt0027977	Al Ernest Garcia	President of the Electro Steel Corp.
+tt0082971	Harrison Ford	Indiana Jones
+tt0082971	Karen Allen	Marion Ravenwood
+tt0082971	Paul Freeman	René Belloq
+tt0082971	Ronald Lacey	Arnold Toht
+tt0082971	John Rhys-Davies	Sallah
+tt0082971	Denholm Elliott	Marcus Brody
+tt0082971	Alfred Molina	Satipo
+tt0082971	Wolf Kahler	Dietrich
+tt0047396	James Stewart	L.B. 'Jeff' Jefferies
+tt0047396	Grace Kelly	Lisa Carol Fremont
+tt0047396	Wendell Corey	Detective Thomas Doyle
+tt0047396	Thelma Ritter	Stella
+tt0047396	Raymond Burr	Lars Thorwald
+tt0047396	Judith Evelyn	Miss Torso
+tt0047396	Ross Bagdasarian	Songwriter
+tt0047396	Georgine Darcy	Miss Torso
+tt0253474	Adrien Brody	Wladyslaw Szpilman
+tt0253474	Thomas Kretschmann	Captain Wilm Hosenfeld
+tt0253474	Frank Finlay	Father
+tt0253474	Maureen Lipman	Mother
+tt0253474	Emilia Fox	Dorota
+tt0253474	Ed Stoppard	Henryk
+tt0253474	Julia Rayner	Regina
+tt0253474	Jessica Kate Meyer	Halina
+tt0407887	Leonardo DiCaprio	Billy Costigan
+tt0407887	Matt Damon	Colin Sullivan
+tt0407887	Jack Nicholson	Frank Costello
+tt0407887	Mark Wahlberg	Dignam
+tt0407887	Martin Sheen	Queenan
+tt0407887	Vera Farmiga	Madolyn
+tt0407887	Alec Baldwin	Ellerby
+tt0407887	Ray Winstone	Mr. French
+tt0103064	Arnold Schwarzenegger	T-800
+tt0103064	Linda Hamilton	Sarah Connor
+tt0103064	Edward Furlong	John Connor
+tt0103064	Robert Patrick	T-1000
+tt0103064	Earl Boen	Dr. Silberman
+tt0103064	Joe Morton	Miles Dyson
+tt0103064	S. Epatha Merkerson	Tarissa Dyson
+tt0103064	Castulo Guerra	Enrique Salceda
+tt0088763	Michael J. Fox	Marty McFly
+tt0088763	Christopher Lloyd	Dr. Emmett Brown
+tt0088763	Lea Thompson	Lorraine Baines
+tt0088763	Crispin Glover	George McFly
+tt0088763	Thomas F. Wilson	Biff Tannen
+tt0088763	Claudia Wells	Jennifer Parker
+tt0088763	Marc McClure	Dave McFly
+tt0088763	Wendie Jo Sperber	Linda McFly
+tt2582802	Miles Teller	Andrew Neiman
+tt2582802	J.K. Simmons	Terence Fletcher
+tt2582802	Paul Reiser	Jim Neiman
+tt2582802	Melissa Benoist	Nicole
+tt2582802	Austin Stowell	Ryan Connolly
+tt2582802	Nate Lang	Travis
+tt2582802	Chris Mulkey	Uncle Frank
+tt2582802	Damon Gupton	Mr. Kramer
+tt0172495	Russell Crowe	Maximus
+tt0172495	Joaquin Phoenix	Commodus
+tt0172495	Connie Nielsen	Lucilla
+tt0172495	Oliver Reed	Proximo
+tt0172495	Richard Harris	Marcus Aurelius
+tt0172495	Derek Jacobi	Senator Gracchus
+tt0172495	Djimon Hounsou	Juba
+tt0172495	David Schofield	Falco
+tt0482571	Hugh Jackman	Robert Angier
+tt0482571	Christian Bale	Alfred Borden
+tt0482571	Michael Caine	Cutter
+tt0482571	Scarlett Johansson	Olivia Wenscombe
+tt0482571	Rebecca Hall	Sarah
+tt0482571	Piper Perabo	Julia McCullough
+tt0482571	David Bowie	Nikola Tesla
+tt0482571	Andy Serkis	Mr. Alley
+tt0110357	Matthew Broderick	Simba
+tt0110357	James Earl Jones	Mufasa
+tt0110357	Jeremy Irons	Scar
+tt0110357	Nathan Lane	Timon
+tt0110357	Ernie Sabella	Pumbaa
+tt0110357	Moira Kelly	Nala
+tt0110357	Whoopi Goldberg	Shenzi
+tt0110357	Cheech Marin	Banzai
+tt0209144	Guy Pearce	Leonard Shelby
+tt0209144	Carrie-Anne Moss	Natalie
+tt0209144	Joe Pantoliano	Teddy
+tt0209144	Mark Boone Junior	Burt
+tt0209144	Russ Fega	Waiter
+tt0209144	Jorja Fox	Catherine
+tt0209144	Stephen Tobolowsky	Sammy Jankis
+tt0209144	Harriet Sansom Harris	Mrs. Jankis
+tt0078788	Martin Sheen	Captain Willard
+tt0078788	Marlon Brando	Colonel Kurtz
+tt0078788	Robert Duvall	Lieutenant Colonel Kilgore
+tt0078788	Frederic Forrest	Chef
+tt0078788	Albert Hall	Chief
+tt0078788	Sam Bottoms	Lance
+tt0078788	Larry Fishburne	Mr. Clean
+tt0078788	Dennis Hopper	Photojournalist
+tt0078748	Sigourney Weaver	Ripley
+tt0078748	Tom Skerritt	Dallas
+tt0078748	John Hurt	Kane
+tt0078748	Yaphet Kotto	Parker
+tt0078748	Bolaji Badejo	Alien
+tt0078748	Harry Dean Stanton	Brett
+tt0078748	Ian Holm	Ash
+tt0078748	Veronica Cartwright	Lambert
+tt0043014	William Holden	Joe Gillis
+tt0043014	Gloria Swanson	Norma Desmond
+tt0043014	Erich von Stroheim	Max von Mayerling
+tt0043014	Nancy Olson	Betty Schaefer
+tt0043014	Jack Webb	Artie Green
+tt0043014	Fred Clark	Sheldrake
+tt0043014	Lloyd Gough	Morino
+tt0043014	Moroni Olson	Moroni
+tt0032553	Charlie Chaplin	A Jewish Barber / Adenoid Hynkel
+tt0032553	Paulette Goddard	Hannah
+tt0032553	Jack Oakie	Benzino Napaloni
+tt0032553	Henry Daniell	Garbitsch
+tt0032553	Billy Gilbert	Herring
+tt0032553	Grace Hayle	Madame Napaloni
+tt0032553	Carter DeHaven	Bacterian Ambassador
+tt0032553	Maurice Moscovich	Mr. Jaeckel
